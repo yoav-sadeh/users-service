@@ -1,6 +1,9 @@
+
 name := "users-service"
 
-version := "1.0"
+organization := "com.hamlazot"
+
+version := "SNAPSHOT-0.1.0"
 
 scalaVersion := "2.11.8"
 
