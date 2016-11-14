@@ -11,19 +11,19 @@ import com.hamlazot.users.interpreters.ConcreteUsersAggrgate
 object UsersRepositoryF extends ConcreteUsersAggrgate{
   object DSL {
 
-    sealed trait AccountDataCall[+A] extends DataCall[A]
+    sealed trait UsersDataCall[+A] extends DataCall[A]
 
-    final case class UserQuery(id: UUID) extends AccountDataCall[FutureStringOr[User]]
+    final case class UserQuery(id: UUID) extends UsersDataCall[FutureStringOr[User]]
 
-    final case class InsertUser(user: User) extends AccountDataCall[FutureStringOr[Unit]]
+    final case class InsertUser(user: User) extends UsersDataCall[FutureStringOr[Unit]]
 
-    final case class UpdateUserName(id: UUID, name:String) extends AccountDataCall[FutureStringOr[User]]
+    final case class UpdateUserName(id: UUID, name:String) extends UsersDataCall[FutureStringOr[Unit]]
 
-    final case class UpdateUserTrustees(id: UUID, trustees: Trustees, addOrRemove: AddOrRemove) extends AccountDataCall[FutureStringOr[User]]
+    final case class UpdateUserTrustees(id: UUID, trustees: Trustees, addOrRemove: AddOrRemove) extends UsersDataCall[FutureStringOr[Unit]]
 
-    final case class UpdateUserTrusters(id: UUID, trusters: Trusters, addOrRemove: AddOrRemove) extends AccountDataCall[FutureStringOr[User]]
+    final case class UpdateUserTrusters(id: UUID, trusters: Trusters, addOrRemove: AddOrRemove) extends UsersDataCall[FutureStringOr[Unit]]
 
-    final case class DeleteUser(id: UUID) extends AccountDataCall[FutureStringOr[Unit]]
+    final case class DeleteUser(id: UUID) extends UsersDataCall[FutureStringOr[Unit]]
 
   }
 
