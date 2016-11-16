@@ -14,12 +14,12 @@ class UsersDatabase (override val connector: KeySpaceDef) extends Database[Users
 /**
  * This is the production database, it connects to a secured cluster with multiple contact points
  */
-object ProductionDb extends UsersDatabase(connector)
 
-trait ProductionDatabaseProvider {
+trait DatabaseProvider {
   def database: UsersDatabase
 }
 
-trait ProductionDatabase extends ProductionDatabaseProvider {
+object ProductionDb extends UsersDatabase(connector)
+trait ProductionDatabase extends DatabaseProvider {
   override val database = ProductionDb
 }

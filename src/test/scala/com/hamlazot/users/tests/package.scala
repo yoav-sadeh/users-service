@@ -1,5 +1,7 @@
 package com.hamlazot.users
 
+import com.hamlazot.users.dal.{UsersDatabase, DatabaseProvider}
+
 /**
  * @author yoav @since 11/14/16.
  */
@@ -23,5 +25,10 @@ package object tests {
      * Create an embedded connector, used for testing purposes
      */
     lazy val testConnector = ContactPoint.embedded.noHeartbeat().keySpace(s"${keyspace}_test")
+  }
+
+  object TestDb extends UsersDatabase(Connector.testConnector)
+  trait TestDatabase extends DatabaseProvider {
+    override val database = TestDb
   }
 }

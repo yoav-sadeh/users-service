@@ -6,7 +6,7 @@ import com.datastax.driver.core.utils.UUIDs
 import com.hamlazot.users.DataDSL.{DataOpteration, DataStoreRequest}
 
 import com.hamlazot.users.UsersRepositoryF.DSL.{InsertUser, UserQuery, DeleteUser, UpdateUserName, UpdateUserTrustees, UpdateUserTrusters}
-import com.hamlazot.users.dal.{Connector, ProductionDatabase}
+import com.hamlazot.users.dal._
 import com.typesafe.scalalogging.LazyLogging
 import com.websudos.phantom.connectors.KeySpace
 
@@ -16,8 +16,9 @@ import scalaz.{Id, ~>}
 /**
  * @author yoav @since 11/9/16.
  */
-class UsersRepositoryInterpreter(implicit val ec: ExecutionContext) extends (DataStoreRequest ~> Id.Id) with LazyLogging with ProductionDatabase {
+trait UsersRepositoryInterpreter extends (DataStoreRequest ~> Id.Id) with LazyLogging with DatabaseProvider {
 
+  implicit val ec: ExecutionContext
   override def apply[A](fa: DataStoreRequest[A]): Id.Id[A] = {
     fa match {
       case DataOpteration(operation) =>
@@ -61,7 +62,11 @@ case class InsertFailedException(user: ConcreteUser) extends UsersRepositoryInte
 
 object Appapp extends App {
   implicit val executionContext = scala.concurrent.ExecutionContext.Implicits.global
-  val repo = new UsersRepositoryInterpreter
+  val repo = new UsersRepositoryInterpreter{
+    override implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
+
+    override def database: UsersDatabase = ProductionDb
+  }
   val createQuery = repo.database.usersModel.autocreate(KeySpace("hamlazot")).queryString
   //repo.database.usersModel.autocreate(Connector.connector.provider.space)
   import com.hamlazot.users.UsersRepositoryF.AccountDataOperations.{insert,query, updateName, updateTrustees, updateTrusters}
