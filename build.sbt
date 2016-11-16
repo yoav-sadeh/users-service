@@ -20,7 +20,8 @@ libraryDependencies ++= Seq(
   "org.json4s" %% "json4s-ext" % "3.2.11",
   "com.hamlazot" %% "common-domain" % "SNAPSHOT-0.1.0",
   "com.websudos" %% "phantom-dsl" % "1.29.5",
-  "org.scalacheck" %% "scalacheck" % "1.13.4" % Test
+  "org.scalacheck" %% "scalacheck" % "1.13.4" % Test,
+  "org.specs2" %% "specs2-core" % "3.8.6" % Test
 )
 
 resolvers ++= Seq(
