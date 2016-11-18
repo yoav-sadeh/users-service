@@ -13,18 +13,20 @@ package object tests {
 
   import scala.collection.JavaConversions._
 
+  val ctxt = scala.concurrent.ExecutionContext.Implicits.global
+
   object Connector {
     val config = ConfigFactory.load()
 
-    val hosts = config.getStringList("cassandra.host")
-    val inets = hosts.map(InetAddress.getByName)
+    //val hosts = config.getStringList("cassandra.host")
+    //val inets = hosts.map(InetAddress.getByName)
 
     val keyspace: String = config.getString("cassandra.keyspace")
 
     /**
      * Create an embedded connector, used for testing purposes
      */
-    lazy val testConnector = ContactPoint.embedded.noHeartbeat().keySpace(s"${keyspace}_test")
+    lazy val testConnector = ContactPoint.local.noHeartbeat().keySpace(s"${keyspace}_test")
   }
 
   object TestDb extends UsersDatabase(Connector.testConnector)

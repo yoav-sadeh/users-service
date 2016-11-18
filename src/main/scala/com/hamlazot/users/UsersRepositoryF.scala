@@ -25,6 +25,7 @@ object UsersRepositoryF extends ConcreteUsersAggrgate{
 
     final case class DeleteUser(id: UUID) extends UsersDataCall[FutureStringOr[Unit]]
 
+    case class RepositoryException(dataCall: DataCall[_], ex: Throwable) extends Exception(s"data call ${dataCall.getClass.getSimpleName} caused exception", ex)
   }
 
    object AccountDataOperations extends DataOperations {

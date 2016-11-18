@@ -4,6 +4,7 @@ package interpreters
 import com.hamlazot.domain.common.users.UsersService
 import com.hamlazot.users.DataDSL.{Fetchable, DataStoreRequest}
 import com.hamlazot.users.UsersRepositoryF.AccountDataOperations._
+import com.hamlazot.users.UsersRepositoryF.DSL.RepositoryException
 import com.hamlazot.users.UsersRepositoryF.{Add,Remove}
 import com.typesafe.scalalogging.LazyLogging
 import scala.concurrent.{ExecutionContext, Future}
@@ -26,6 +27,12 @@ trait ConcreteUsersService extends UsersService with ConcreteUsersAggrgate with 
     runFC(inserted)(dbLogger).left.get
 
       val dbResult = runFC(inserted)(dbDriver).right.get
+
+    dbResult.onFailure {
+      case ex @ RepositoryException(o, e) =>  logger.error(ex.getMessage, e)
+
+      case e: Exception => logger.warn(e.getMessage)
+    }
       dbResult.map(p => CreateUserResponse(user.id))
   }
 
