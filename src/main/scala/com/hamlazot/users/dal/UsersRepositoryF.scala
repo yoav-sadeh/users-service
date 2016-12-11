@@ -1,8 +1,9 @@
-package com.hamlazot
-package users
+package com.hamlazot.users.dal
 
 import java.util.UUID
-import DataDSL._
+
+import com.hamlazot.users.DataDSL.{DataCall, DataOperations}
+import com.hamlazot.users.FutureStringOr
 import com.hamlazot.users.interpreters.ConcreteUsersAggrgate
 
 /**

@@ -1,14 +1,13 @@
-package com.hamlazot.users
-package tests
+package com.hamlazot.users.tests.specs
 
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 import com.hamlazot.users.DataDSL.DataStoreRequest
 import com.hamlazot.users.interpreters.{ConcreteUsersService, RepositoryLoggerInterpreter}
+import com.hamlazot.users.tests.ctxt
 import com.hamlazot.users.tests.interpreters.InMemUsersRepoInterpreter
 import org.specs2.mutable.Specification
-import org.specs2.specification.BeforeAll
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext}

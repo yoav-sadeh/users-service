@@ -5,8 +5,9 @@ package interpreters
 import com.datastax.driver.core.utils.UUIDs
 import com.hamlazot.users.DataDSL.{DataOpteration, DataStoreRequest}
 
-import com.hamlazot.users.UsersRepositoryF.DSL.{InsertUser, UserQuery, DeleteUser, UpdateUserName, UpdateUserTrustees, UpdateUserTrusters}
+import com.hamlazot.users.dal.UsersRepositoryF.DSL.{InsertUser, UserQuery, DeleteUser, UpdateUserName, UpdateUserTrustees, UpdateUserTrusters}
 import com.hamlazot.users.dal._
+import com.hamlazot.users.dal.cassandra.{ProductionDb, DatabaseProvider, UsersDatabase}
 import com.typesafe.scalalogging.LazyLogging
 import com.websudos.phantom.connectors.KeySpace
 
@@ -69,7 +70,7 @@ object Appapp extends App {
   }
   val createQuery = repo.database.usersModel.autocreate(KeySpace("hamlazot")).queryString
   //repo.database.usersModel.autocreate(Connector.connector.provider.space)
-  import com.hamlazot.users.UsersRepositoryF.AccountDataOperations.{insert,query, updateName, updateTrustees, updateTrusters}
+  import com.hamlazot.users.dal.UsersRepositoryF.AccountDataOperations.{insert,query, updateName, updateTrustees, updateTrusters}
   val uu = java.util.UUID.randomUUID()
   //runFC(insert(ConcreteUser(uu, "yoav", Map(uu -> 3), Map(uu -> 5))))(repo)
   val id = java.util.UUID.fromString("6db197f8-7679-474e-86ec-7b5c9899bee9")

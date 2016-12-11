@@ -1,6 +1,6 @@
 package com.hamlazot.users
 
-import com.hamlazot.users.dal.{UsersDatabase, DatabaseProvider}
+import com.hamlazot.users.dal.cassandra.{DatabaseProvider, UsersDatabase}
 
 /**
  * @author yoav @since 11/14/16.

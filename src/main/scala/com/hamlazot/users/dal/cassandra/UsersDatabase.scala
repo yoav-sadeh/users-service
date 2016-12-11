@@ -1,6 +1,7 @@
-package com.hamlazot.users.dal
+package com.hamlazot.users.dal.cassandra
 
-import Connector._
+import com.hamlazot.users.dal.cassandra.ConcreteUsersTable
+import com.hamlazot.users.dal.cassandra.Connector._
 import com.websudos.phantom.database.Database
 import com.websudos.phantom.dsl.KeySpaceDef
 

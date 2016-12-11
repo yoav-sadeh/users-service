@@ -1,12 +1,12 @@
-package com.hamlazot.users.dal
+package com.hamlazot.users.dal.cassandra
 
 import java.util.UUID
 
-import com.datastax.driver.core.{SimpleStatement, Row}
-import com.hamlazot.users.UsersRepositoryF.{Add, AddOrRemove, Remove}
+import com.datastax.driver.core.{Row, SimpleStatement}
+import com.hamlazot.users.dal.UsersRepositoryF.{Remove, AddOrRemove, Add}
 import com.hamlazot.users.interpreters.ConcreteUser
 import com.websudos.phantom.CassandraTable
-import com.websudos.phantom.builder.query.{QueryOptions, CQLQuery}
+import com.websudos.phantom.builder.query.QueryOptions
 import com.websudos.phantom.builder.query.prepared.ExecutablePreparedQuery
 import com.websudos.phantom.connectors.RootConnector
 import com.websudos.phantom.dsl._

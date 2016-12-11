@@ -3,8 +3,8 @@ package users.tests
 package interpreters
 
 import com.hamlazot.users.DataDSL.{DataOpteration, DataStoreRequest}
-import com.hamlazot.users.UsersRepositoryF.DSL._
-import com.hamlazot.users.UsersRepositoryF.{Add, Remove}
+import com.hamlazot.users.dal.UsersRepositoryF.DSL._
+import com.hamlazot.users.dal.UsersRepositoryF.{Add, Remove}
 import com.hamlazot.users.interpreters.{InsertFailedException, ConcreteUser}
 import com.typesafe.scalalogging.LazyLogging
 import java.util.UUID

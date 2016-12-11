@@ -1,9 +1,9 @@
-package com.hamlazot.users.dal
+package com.hamlazot.users.dal.cassandra
 
 import java.net.InetAddress
 
 import com.typesafe.config.ConfigFactory
-import com.websudos.phantom.connectors.{ContactPoint, ContactPoints}
+import com.websudos.phantom.connectors.ContactPoints
 
 import scala.collection.JavaConversions._
 
